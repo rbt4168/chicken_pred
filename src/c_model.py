@@ -5,7 +5,7 @@ class Classifier(nn.Module):
         super(Classifier, self).__init__()
         # torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)
         # torch.nn.MaxPool2d(kernel_size, stride, padding)
-        # input 維度 [3, 128, 128]
+
         self.cnn = nn.Sequential(
             nn.Conv2d(3, 64, 3, 1, 1),  # [64, 128, 128]
             nn.BatchNorm2d(64),
@@ -33,11 +33,11 @@ class Classifier(nn.Module):
             nn.MaxPool2d(2, 2, 0),       # [512, 4, 4]
         )
         self.fc = nn.Sequential(
-            nn.Linear(512*7*7, 1024),
+            nn.Linear(512 * 7 * 7, 1024),
             nn.ReLU(),
             nn.Linear(1024, 512),
             nn.ReLU(),
-            nn.Linear(512, 11)
+            nn.Linear(512, 4)
         )
 
     def forward(self, x):
