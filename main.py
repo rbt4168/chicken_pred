@@ -10,16 +10,17 @@ from src.c_dataset import ChickenDataset
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
     split_ratio = 0.8
-    n_epochs = 8
+    n_epochs = 100
     n_batch = 32
-    lr = 0.0003
+    lr = 3e-4
     weight_decay = 1e-5
 
     main_tfm = transforms.Compose([
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
     ])
 
-    data_set = ChickenDataset("./train_data.csv", tfm=main_tfm)
+    data_set = ChickenDataset("./train_data.csv", main_tfm)
     data_map = data_set.get_label_map()
     print(data_map)
 
